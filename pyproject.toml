@@ -10,7 +10,10 @@ dependencies = [
     "pandas (>=3.0.5,<4.0.0)",
     "caldav (>=3.2.1,<4.0.0)",
     "vobject (>=0.9.9,<0.10.0)",
-    "whirlpool-sixth-sense @ git+https://github.com/abmantis/whirlpool-sixth-sense.git"
+    "whirlpool-sixth-sense @ git+https://github.com/abmantis/whirlpool-sixth-sense.git",
+    "python-dotenv (>=1.2.2,<2.0.0)",
+    "sqlalchemy (>=2.0.52,<3.0.0)",
+    "pymysql (>=1.2.0,<2.0.0)"
 ]
 
 [tool.poetry]

@@ -55,7 +55,7 @@ class KitchenAidOven:
     def fahrenheit_to_celsius(temp_f: float) -> float:
         temp_c = (temp_f - 32) * 5 / 9
 
-        logger.debug(
+        logger.info(
             "Converted temperature %.1f°F -> %.1f°C",
             temp_f,
             temp_c,
