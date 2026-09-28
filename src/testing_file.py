@@ -3,6 +3,7 @@ import logging
 import smtplib
 from email.message import EmailMessage
 import os
+from kitchen import oven
 from mail_sender.send_mail import MailSender
 from apple_calendar.update_calendar import AppleCalendar
 from kitchen.oven import KitchenAidOven
@@ -80,53 +81,55 @@ logger = logging.getLogger(__name__)
 #     description="Created by Jarvis",
 # )
 
-# async def main() -> None:
-#     oven = KitchenAidOven(
-#         email=os.environ["JARVIS_WHIRLPOOL_EMAIL"],
-#         password=os.environ["JARVIS_WHIRLPOOL_PASSWORD"],
-#     )
-
-#     try:
-#         await oven.connect()
-
-#         status = await oven.get_status()
-
-#         print("Oven:", status["name"])
-#         print("Online:", status["online"])
-#         print("State:", status["state"])
-#         print("Current temp:", status["temperature_c"])
-#         print("Target temp:", status["target_temperature_c"])
-
-#         success = await oven.stop()
-
-#         print("Preheat result:", success)
-
-#         await asyncio.sleep(5)
-
-#         status = await oven.get_status()
-
-#         print("\nAfter command:")
-#         print("State:", status["state"])
-#         print("Cook mode:", status["cook_mode"])
-#         print("Current temp:", status["temperature_c"])
-#         print("Target temp:", status["target_temperature_c"])
-
-#     finally:
-#         await oven.disconnect()
-
-
-def main() -> None:
-    portfolio_reader = PortfolioReader()
+async def main() -> None:
+    oven = KitchenAidOven(
+        email=os.environ["JARVIS_WHIRLPOOL_EMAIL"],
+        password=os.environ["JARVIS_WHIRLPOOL_PASSWORD"],
+    )
 
     try:
-        portfolio_df = portfolio_reader.read_portfolio()
-        print("Portfolio DataFrame:")
-        print(portfolio_df)
-    except FileNotFoundError as e:
-        logger.error(e)
-    except ValueError as e:
-        logger.error(e)
+        await oven.connect()
+
+        status = await oven.get_status()
+
+        print("Oven:", status["name"])
+        print("Online:", status["online"])
+        print("State:", status["state"])
+        print("Current temp:", status["temperature_c"])
+        print("Target temp:", status["target_temperature_c"])
+
+        success = await oven.stop()
+        # success = await oven.preheat(256)
+
+        print("Preheat result:", success)
+
+        await asyncio.sleep(5)
+
+        status = await oven.get_status()
+
+        print("\nAfter command:")
+        print("State:", status["state"])
+        print("Cook mode:", status["cook_mode"])
+        print("Current temp:", status["temperature_c"])
+        print("Target temp:", status["target_temperature_c"])
+
+    finally:
+        await oven.disconnect()
+
+
+# def main() -> None:
+#     portfolio_reader = PortfolioReader()
+
+#     try:
+#         portfolio_df = portfolio_reader.read_portfolio()
+#         print("Portfolio DataFrame:")
+#         print(portfolio_df)
+#     except FileNotFoundError as e:
+#         logger.error(e)
+#     except ValueError as e:
+#         logger.error(e)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
+    # main()
 
