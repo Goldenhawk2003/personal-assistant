@@ -17,7 +17,10 @@ dependencies = [
     "websocket-client (>=1.9.2,<2.0.0)",
     "wakeonlan (>=4.0.0,<5.0.0)",
     "requests (>=2.34.2,<3.0.0)",
-    "urllib3 (>=2.8.0,<3.0.0)"
+    "urllib3 (>=2.8.0,<3.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "yfinance (>=1.8.0,<2.0.0)",
+    "pydantic (>=2.14.3,<3.0.0)"
 ]
 
 [tool.poetry]
